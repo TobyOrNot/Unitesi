@@ -1,21 +1,28 @@
 import styles from "./page.module.css";
+import logo from '/home/tobias/Desktop/UNI/Ing Software/Progetto/Implementazione/unitesi/public/logo.png'
+
 
 export default function ViewInviaComunicazione() {
   return (
-    <form action="send_email.php" method="post">
-      <label htmlFor="firstName">Email Destinatario</label>
-      <input type="text" id="firstName" name="firstName" required />
-      <br />
+    <div className="container">
+        <header>
+            <img src={logo} alt="Logo" className="logo" />
+        </header>
+        <main>
+            <h1>Invia Comunicazione</h1>
+            <form>
+                <label htmlFor="email">Destinatario</label>
+                <input type="email" id="email" name="email" required />
 
-      <label htmlFor="email">Oggetto</label>
-      <input type="email" id="email" name="email" required />
-      <br />
+                <label htmlFor="subject">Oggetto</label>
+                <input type="text" id="subject" name="subject" required />
 
-      <label htmlFor="message">Messaggio:</label>
-      <textarea id="message" name="message" required></textarea>
-      <br />
+                <label htmlFor="message">Messaggio</label>
+                <textarea id="message" name="message" required></textarea>
 
-      <input type="submit" value="Send" />
-    </form>
-  );
+                <button type="submit">Invia Messaggio</button>
+            </form>
+        </main>
+    </div>
+);
 }

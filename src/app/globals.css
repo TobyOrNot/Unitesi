@@ -1,60 +1,75 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
 }
 
-form {
+.container {
   background-color: #ffffff;
-  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  margin: auto; /* Assicura che il form sia centrato orizzontalmente e verticalmente */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 400px;
+  text-align: center;
 }
 
-label {
-  display: block;
-  margin-bottom: 8px;
+header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  max-width: 100px;
+}
+
+main {
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
   color: #333;
 }
 
-input[type="text"],
-input[type="email"],
-textarea {
-  width: 100%;
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin: 10px 0 5px;
+  color: #555;
+}
+
+input, textarea {
   padding: 10px;
-  margin-bottom: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 14px;
 }
 
 textarea {
-  height: 100px;
-  resize: none; /* Impedisce di ridimensionare la textarea */
+  resize: vertical;
+  min-height: 100px;
 }
 
-input[type="submit"] {
-  background-color: #0056b3;
-  color: white;
+button {
+  margin-top: 20px;
+  padding: 10px;
   border: none;
-  padding: 10px 20px;
-  text-transform: uppercase;
-  font-weight: bold;
   border-radius: 4px;
+  background-color: #007BFF;
+  color: #fff;
+  font-size: 16px;
   cursor: pointer;
-  display: block; /* Centra il pulsante nel form */
-  width: 100%;
 }
 
-input[type="submit"]:hover {
-  background-color: #004494;
-}
-
-br {
-  clear: both;
+button:hover {
+  background-color: #0056b3;
 }
