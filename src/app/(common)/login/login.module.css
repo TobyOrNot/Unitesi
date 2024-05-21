@@ -1,9 +1,9 @@
   /* Login */
-  body {
+  .body {
     background: #D8E1E8FF; 
   }
 
-.LoginContainer {
+.container {
     position: absolute; 
     top: 0px; 
     left: 1027px; 
@@ -61,7 +61,7 @@
 
 
  /* Textbox 4 */
-.login-form {
+.loginForm{
     position: absolute; 
     top: 164px; 
     left: 36px; 

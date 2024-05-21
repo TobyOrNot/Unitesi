@@ -1,13 +1,13 @@
-import './LoginContainer.css'
+import styles from './login.module.css'
 import Image from 'next/image'
 
-export default function LoginView() {
+export default function Login() {
   return (
-    <>
-    <Image src="/images/Group2.png" className='image2' width="355" height="355"/>
-    <div className="LoginContainer">
-    <Image src="/images/Group.png" className='image1' width="355" height="355"/>
-    <form className="login-form" >
+    <div className={styles.body}>
+    <Image src="/images/Group2.png" className={styles.image2} width="355" height="355"/>
+    <div className={styles.container}>
+    <Image src="/images/Group.png" className={styles.image1} width="355" height="355"/>
+    <form className={styles.loginForm} >
       <div className="form-group">
         <input
           className='input1'
@@ -25,10 +25,10 @@ export default function LoginView() {
           required
         />
       </div>
-      <button className="button" >Accedi</button>
+      <button className={styles.button} >Accedi</button>
     </form>
     </div>
-    </>
+    </div>
 );
 }
 
