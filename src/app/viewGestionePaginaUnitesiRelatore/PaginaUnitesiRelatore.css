@@ -1,0 +1,61 @@
+/* Header */
+.header {
+    position: absolute; 
+    top: 0px; 
+    left: 0px; 
+    width: 1920px; 
+    height: 227px; 
+    background: #F5F1FEFF; /* primary-100 */
+    border-radius: 4px; /* border-m */
+    border-width: 2px; 
+    border-color: #323743FF; /* neutral-700 */
+    border-style: solid; 
+  }
+
+  /* Roadmap */
+.roadmap {
+    position: absolute; 
+    top: 227px; 
+    left: 170px; 
+    width: 957px; 
+    height: 853px; 
+    background: #FFFFFFFF; /* white */
+    border-radius: 4px; /* border-m */
+    box-shadow: 0px 0px 1px #171a1f, 0px 0px 2px #171a1f; /* shadow-xs */
+  }
+
+
+  /* Checkpoint*/
+.checkpoint {
+    width: 287px; 
+    height: 74px; 
+    padding: 0 10px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: #FFFFFFFF; /* white */
+    background: #6D31EDFF; /* primary-500 */
+    opacity: 1; 
+    border: none; 
+    border-radius: 4px; /* border-m */
+    gap: 0px; 
+  }
+  .checkpoint .icon {
+    width: 40px; 
+    height: 40px; 
+    fill: #FFFFFFFF; /* white */
+  }
+  /* Hover */
+  .checkpoint:hover {
+    color: #FFFFFFFF; /* white */
+    background: #5113D7FF; /* primary-600 */
+  }
+  /* Pressed */
+  .checkpoint:hover:active {
+    color: #FFFFFFFF; /* white */
+    background: #3F0EA6FF; /* primary-700 */
+  }
+  /* Disabled */
+  .checkpoint:disabled {
+    opacity: 0.4; 
+  }

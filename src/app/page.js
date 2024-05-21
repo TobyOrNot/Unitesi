@@ -1,11 +1,11 @@
 import styles from "./page.module.css";
-import LoginView from "./login/login.js"
+import PaginaUnitesiRelatore from "./viewGestionePaginaUnitesiRelatore/PaginaUnitesiRelatore.js"
 
 
-export default function ViewInviaComunicazione() {
+export default function Page() {
   return (
     <>
-        <LoginView />
+        <PaginaUnitesiRelatore />
     </>
 );
 }
