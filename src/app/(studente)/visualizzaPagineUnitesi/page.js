@@ -1,5 +1,7 @@
 import React from 'react';
 import './ViewPages.css';
+import PageItem from './components/PageItem.js';
+import SearchHeader from './components/searchHeader';
 
 const pagesData = [
   {
@@ -16,33 +18,48 @@ const pagesData = [
     creationDate: '2023-06-15',
     url: '/pagina-2',
   },
-  {name: 'Tesi sul perchè gli egiziani credevano nel dio Cane (Anubi)',
-  members: ['Marco', 'Antonio'],
-  role: 'Tesista',
-  creationDate: '2023-06-15',
-  url: '/pagina-3',
-},
+  {
+    name: 'Tesi sul perchè gli egiziani credevano nel dio Cane (Anubi)',
+    members: ['Marco', 'Antonio'],
+    role: 'Tesista',
+    creationDate: '2023-06-15',
+    url: '/pagina-3',
+  },
+  {
+    name: 'Tesi sul perchè gli egiziani credevano nel dio Cane (Anubi)',
+    members: ['Marco', 'Antonio'],
+    role: 'Tesista',
+    creationDate: '2023-06-15',
+    url: '/pagina-3',
+  },
+  {
+    name: 'Tesi sul perchè gli egiziani credevano nel dio Cane (Anubi)',
+    members: ['Marco', 'Antonio'],
+    role: 'Tesista',
+    creationDate: '2023-06-15',
+    url: '/pagina-3',
+  },
+
+ 
   // Aggiungi altre pagine qui
 ];
 
-function ViewPages() {
+function ViewPages({ nomeDocente = "Marco Patella" }) {
   return (
-    <div className="view-pages-container">
-      <h2>Pagine dello Studente</h2>
-      {pagesData.map((page, index) => (
-        <div key={index} className="page-item">
-          <h3>{page.name}</h3>
-          <p><strong>Membri:</strong> {page.members.join(', ')}</p>
-          <p><strong>Ruolo:</strong> {page.role}</p>
-          <p><strong>Data di Creazione:</strong> {page.creationDate}</p>
-          <button 
-            className="view-page-button"
-          >
-            Visualizza Pagina
-          </button>
-        </div>
-      ))}
-    </div>
+      <div className="view-pages-container">
+      <h2>Pagine Unitesi di {nomeDocente}</h2>
+      <SearchHeader/>
+        {pagesData.map((page, index) => (
+          <PageItem
+            key={index}
+            name={page.name}
+            members={page.members}
+            role={page.role}
+            creationDate={page.creationDate}
+            url={page.url}
+          />
+        ))}
+      </div>
   );
 }
 
