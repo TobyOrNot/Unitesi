@@ -1,14 +1,16 @@
 import Link from 'next/link';
 import './homePage.css';
+import Image from 'next/image'
 
 const HomePage = () => {
-  const professorEmail = 'professor@example.com';
+  const professorEmail = 'marco.patella@unibo.it';
 
   return (
-    <div>
+    <div class="immagineSfondo">
+    <Image src="/images/cappellino.png"  class="cappellino" width="100" height="100" />
       <header>
       <div class="overlay">
-         <h1>Home Page Docente</h1>
+         <h1>Home Page</h1>
            <h3>{professorEmail}</h3>
 	      <br></br>
       <nav>

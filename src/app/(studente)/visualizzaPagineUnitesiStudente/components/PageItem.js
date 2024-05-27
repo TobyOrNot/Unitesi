@@ -6,7 +6,7 @@ import Image from 'next/image'
 function PageItem({ name, members, role, creationDate, url }) {
   return (
     <div className="page-item">
-      <Image src="/images/Line.png" alt="App Logo" className="line" width="2000" height="2000" />
+      <Image src="/images/cappellino.png" className="line" width="2000" height="2000" />
       <div className='content'>
       <h3>{name}</h3>
       <p><strong>Membri:</strong> {members.join(', ')}</p>
