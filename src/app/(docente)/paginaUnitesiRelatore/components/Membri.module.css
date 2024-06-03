@@ -1,0 +1,55 @@
+.membriContainer{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.correlatorsContainer {
+  margin-top: 20px;
+}
+
+.correlatorItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.addCorrelator {
+  display: flex;
+  margin-top: 30px;
+  right:30px;
+}
+
+.addCorrelator input {
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 7px;
+  background-color: #e0e2ff;
+}
+
+.addCorrelator button {
+  padding: 5px 10px;
+  background-color: #33188c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.removeButton {
+  background-color: rgb(224, 30, 30);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-weight: bold;
+}

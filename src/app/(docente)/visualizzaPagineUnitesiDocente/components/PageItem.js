@@ -1,23 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './PageItem.css';
-import Image from 'next/image'
+import styles from './PageItem.module.css';
+import Image from 'next/image';
 
-function PageItem({ name, members, role, creationDate, url }) {
+function PageItem({ name, members, studentRole, teacherRole, creationDate, url }) {
   return (
-    <div className="page-item">
-      <Image src="/images/Line.png" alt="App Logo" className="line" width="2000" height="2000" />
-      <div className='content'>
-      <h3>{name}</h3>
-      <p><strong>Membri:</strong> {members.join(', ')}</p>
-      <p><strong>Ruolo:</strong> {role}</p>
-      <p><strong>Data di Creazione:</strong> {creationDate}</p>
+    <div className={styles.pageItem}>
+      <div className={styles.teacherRole}>{teacherRole}</div> {}
+      <Image src="/images/Line.png" className={styles.line} width="2000" height="2000" />
+      
+      <div className={styles.content}>
+        <h3>{name}</h3>
+        <p><strong>Membri:</strong> {members.join(', ')}</p>
+        <p><strong>Tipo Studente:</strong> {studentRole}</p>
+        <p><strong>Data di Creazione:</strong> {creationDate}</p>
       </div>
-      <button 
-        className="view-page-button"
-      >
-        Visualizza Pagina
-      </button>
+
+      <button className={styles.viewPageButton}> Visualizza Pagina </button>
+      
     </div>
   );
 }
@@ -25,7 +25,8 @@ function PageItem({ name, members, role, creationDate, url }) {
 PageItem.propTypes = {
   name: PropTypes.string.isRequired,
   members: PropTypes.arrayOf(PropTypes.string).isRequired,
-  role: PropTypes.string.isRequired,
+  studentRole: PropTypes.string.isRequired,
+  teacherRole: PropTypes.string.isRequired,
   creationDate: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
 };
