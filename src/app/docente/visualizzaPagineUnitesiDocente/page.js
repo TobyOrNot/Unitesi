@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './ViewPages.module.css';
 import PageItem from './components/PageItem';
 import SearchHeader from './components/searchHeader';
@@ -41,7 +41,41 @@ const pagesData = [
   // Aggiungi altre pagine qui
 ];
 
-function ViewPages({ nomeDocente = "Marco Patella" }) {
+function ViewPages() {
+
+  const [nomeDocente, setNomeDocente] = useState('');
+
+  useEffect(() => {
+    // Check if user is already logged in
+    const checkAuth = async () => {
+      const response = await fetch('http://localhost:3001/isAuthenticated', {
+        method: 'GET',
+        credentials: 'include' // Include session credentials
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setNomeDocente(data.user.nome + ' ' + data.user.cognome);
+      }else {
+        // User is not logged in, redirect them
+        router.push('/login');
+      }
+    };
+  
+    checkAuth();
+  }, []); // Empty dependency array to run only once on component mount
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div className={styles.proposteContainer}>
       <h2 className={styles.title}>Pagine Unitesi di {nomeDocente}</h2>

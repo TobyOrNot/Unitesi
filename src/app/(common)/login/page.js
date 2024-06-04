@@ -86,7 +86,7 @@ export default function Login() {
 
   return (
     <div className={styles.body}>
-      <Image src="/images/LogoUnitesi_NoContorni..png" className={styles.image2} width="355" height="355" />
+      <Image src="/images/LogoUnitesi_NoContorni..png" className={styles.image2} width="2000" height="2000" />
       <div className={styles.container}>
         <Image src="/images/Group.png" className={styles.image1} width="355" height="355" />
         <form className={styles.loginForm} onSubmit={handleSubmit}>

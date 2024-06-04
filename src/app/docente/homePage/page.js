@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './homePage.module.css';
 import Image from 'next/image';
@@ -8,7 +8,6 @@ import Image from 'next/image';
 const HomePage = () => {
   const [isAvailable, setIsAvailable] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const professorEmail = 'marco.patella@unibo.it';
 
   const toggleAvailability = () => {
     setShowModal(true);
@@ -23,6 +22,29 @@ const HomePage = () => {
     setShowModal(false);
   };
 
+
+  const [emailDocente, setEmailDocente] = useState('');
+
+  useEffect(() => {
+    // Check if user is already logged in
+    const checkAuth = async () => {
+      const response = await fetch('http://localhost:3001/isAuthenticated', {
+        method: 'GET',
+        credentials: 'include' // Include session credentials
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setEmailDocente(data.user.username);
+      }else {
+        // User is not logged in, redirect them
+        router.push('/login');
+      }
+    };
+  
+    checkAuth();
+  }, []); // Empty dependency array to run only once on component mount
+
   return (
       <div className={styles.homePageContainer}>
         
@@ -31,7 +53,7 @@ const HomePage = () => {
         </div>
 
             <h1 className={styles.title}>Home Page</h1>
-            <h3 className={styles.professore}>{professorEmail}</h3>
+            <h3 className={styles.professore}>{emailDocente}</h3>
             
             <div className={styles.availability}>
               <div className={`${styles.statusIndicator} ${isAvailable ? styles.available : styles.notAvailable}`}></div>
@@ -45,7 +67,7 @@ const HomePage = () => {
                 </div>
 
                 <div className={styles.visualizzaPagineUnitesi}>
-                  <Link href="/visualizzaPagineUnitesiDocente">
+                  <Link href="/docente/visualizzaPagineUnitesiDocente">
                     <Image src="/images/archivio.png" width="70" height="70" alt="Visualizza Pagine" className={styles.buttonImage}/>
                   </Link>
                 </div>
