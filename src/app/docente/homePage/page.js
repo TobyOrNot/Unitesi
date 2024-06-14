@@ -4,10 +4,12 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './homePage.module.css';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const HomePage = () => {
   const [isAvailable, setIsAvailable] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const router = useRouter();
 
   const toggleAvailability = () => {
     setShowModal(true);
@@ -35,6 +37,9 @@ const HomePage = () => {
   
       if (response.ok) {
         const data = await response.json();
+        if(data.user.role !== 'docente'){
+          router.push('/studente/homePage');
+        }
         setEmailDocente(data.user.username);
       }else {
         // User is not logged in, redirect them

@@ -62,13 +62,15 @@ const HomePage = () => {
             
             <div className={styles.availability}>
               <div className={`${styles.statusIndicator} ${isAvailable ? styles.available : styles.notAvailable}`}></div>
-              {isAvailable ? 'Disponibile per Tesi' : 'Non Disponibile per Tesi'}
+              {'STUDENTE'}
             </div>
 
               <div className={styles.buttonContainer}>
                 
-                <div className={styles.modificaDisponibilità} onClick={toggleAvailability}>
-                  <Image src="/images/modificaDisponibilità.png" width="70" height="70" alt="Cambia Disponibilità" className={styles.buttonImage}/>
+                <div className={styles.modificaDisponibilità}>\
+                <Link href="/studente/visualizzaProposteTesi">
+                  <Image src="/images/ProposteTesi.png" width="70" height="70" alt="Visualizza Proposte Tesi" className={styles.buttonImage}/>
+                </Link>
                 </div>
 
                 <div className={styles.visualizzaPagineUnitesi}>
@@ -83,16 +85,6 @@ const HomePage = () => {
                   </Link>
                 </div>
               </div>
-
-              {showModal && (
-                <div className={styles.modalOverlay}>
-                  <div className={styles.modal}>
-                    <p>Sei sicuro di voler cambiare la disponibilità?</p>
-                    <button onClick={confirmToggleAvailability}>Sì</button>
-                    <button onClick={cancelToggleAvailability}>No</button>
-                  </div>
-                </div>
-              )}
         
       </div>
   );
