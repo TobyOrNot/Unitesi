@@ -4,12 +4,14 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './homePage.module.css';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 
 
 const HomePage = () => {
   const [isAvailable, setIsAvailable] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const router = useRouter();
 
   const toggleAvailability = () => {
     setShowModal(true);
@@ -47,6 +49,19 @@ const HomePage = () => {
   }, []); // Empty dependency array to run only once on component mount
 
 
+  const handleLogout = async () => {
+    const response = await fetch('http://localhost:3001/logout', {
+      method: 'POST',
+      credentials: 'include' // Include session credentials
+    });
+  
+    if (response.ok) {
+      // User is logged out, redirect them
+      router.push('/login');
+    } else {
+      console.error('Logout failed');
+    }
+  };
 
 
 
@@ -85,6 +100,9 @@ const HomePage = () => {
                   </Link>
                 </div>
               </div>
+              <button className="logout-button" onClick={handleLogout}>
+                 Logout
+              </button>
         
       </div>
   );

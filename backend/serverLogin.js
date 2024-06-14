@@ -36,6 +36,13 @@ const testUsers = [
         cognome: 'Patella',
         ruolo: 'Docente'
     },
+    {
+      username: 'ciao',
+      password: 'ciao',
+      nome: ' Marco',
+      cognome: 'Patella',
+      ruolo: 'Docente'
+  },
 ];
 
 // Endpoint per il login
@@ -70,6 +77,12 @@ app.get('/isAuthenticated', (req, res) => {
     // User is not logged in
     res.status(401).send({ message: 'Not authenticated' });
   }
+});
+
+// Endpoint per il logout
+app.post('/logout', (req, res) => {
+    req.session.destroy();
+    res.status(200).send({ message: 'Logout successful' });
 });
 
 
