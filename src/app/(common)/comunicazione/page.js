@@ -5,7 +5,7 @@ export default function Comunicazione() {
     return (
       <div className={styles.emailFormContainer}>
         <div className={styles.logo}>
-          <Image src="/images/unitesi.png" alt="App Logo" className={styles.logo} width="2000" height="2000" />
+          <Image src="/images/LogoUnitesi_NoContorni.png" alt="App Logo" className={styles.logo} width="2000" height="2000" />
         </div>
         <h2 className={styles.h2}>Invia Comunicazione</h2>
         <form>

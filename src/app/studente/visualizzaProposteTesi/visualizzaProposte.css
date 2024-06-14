@@ -5,12 +5,15 @@
 }
 
 body {
-	--h: 200deg;
-	--l: 43%;
-	--brandColor: hsl(var(--h), 71%, var(--l));
 	font-family: Montserrat, sans-serif;
 	background-color: whitesmoke;
-  margin-top: 20px; /* Adjust the top margin */
+	margin: 0;
+}
+
+h1 {
+	margin: 0;
+	text-align: center;
+	color: rgb(0, 0, 0);
 }
 
 p {
@@ -21,20 +24,10 @@ p {
 ol {
 	list-style: none;
 	counter-reset: list;
-  padding: 5rem 1rem 0;
-
 }
 
 li {
-	--stop: calc(100% / var(--length) * var(--i));
-	--l: 62%;
-	--l2: 88%;
-	--h: calc((var(--i) - 1) * (180 / var(--length)));
-	--c1: hsl(var(--h), 71%, var(--l));
-	--c2: hsl(var(--h), 71%, var(--l2));
-	
 	position: relative;
-	counter-increment: list;
 	max-width: 60rem;
 	margin: 2rem auto;
 	padding: 2rem 1rem 1rem;
@@ -42,6 +35,7 @@ li {
 	border-radius: 0.25rem;
 	overflow: hidden;
 	background-color: white;
+	counter-increment: list;
 }
 
 li::before {
@@ -52,7 +46,7 @@ li::before {
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: linear-gradient(to right, var(--c1) var(--stop), var(--c2) var(--stop));
+	background:#b9aceb;
 }
 
 h3 {
@@ -73,7 +67,7 @@ h3::before {
 	content: counter(list);
 	padding: 1rem;
 	border-radius: 50%;
-	background-color: var(--c1);
+	background-color: #b9aceb;
 	color: white;
 }
 

@@ -37,9 +37,10 @@ const HomePage = () => {
   
       if (response.ok) {
         const data = await response.json();
-        if(data.user.role !== 'docente'){
+       /* if(data.user.role !== 'docente'){
           router.push('/studente/homePage');
         }
+          */
         setEmailDocente(data.user.username);
       }else {
         // User is not logged in, redirect them
@@ -54,7 +55,7 @@ const HomePage = () => {
       <div className={styles.homePageContainer}>
         
         <div className={styles.logo}>
-          <Image src="/images/LogoUnitesi_NoContorni..png" className={styles.logo} width="300" height="100" />
+          <Image src="/images/LogoUnitesi_NoContorni.png" className={styles.logo} width="300" height="100" />
         </div>
 
             <h1 className={styles.title}>Home Page</h1>
