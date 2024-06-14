@@ -9,22 +9,7 @@ import { useRouter } from 'next/navigation';
 
 
 const HomePage = () => {
-  const [isAvailable, setIsAvailable] = useState(true);
-  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
-
-  const toggleAvailability = () => {
-    setShowModal(true);
-  };
-
-  const confirmToggleAvailability = () => {
-    setIsAvailable(!isAvailable);
-    setShowModal(false);
-  };
-
-  const cancelToggleAvailability = () => {
-    setShowModal(false);
-  };
 
   const [studentEmail, setStudentEmail] = useState('');
 
@@ -75,23 +60,12 @@ const HomePage = () => {
             <h1 className={styles.title}>Home Page</h1>
             <h3 className={styles.professore}>{studentEmail}</h3>
             
-            <div className={styles.availability}>
-              <div className={`${styles.statusIndicator} ${isAvailable ? styles.available : styles.notAvailable}`}></div>
-              {'STUDENTE'}
-            </div>
-
               <div className={styles.buttonContainer}>
                 
                 <div className={styles.modificaDisponibilità}>\
                 <Link href="/studente/visualizzaProposteTesi">
                   <Image src="/images/ProposteTesi.png" width="70" height="70" alt="Visualizza Proposte Tesi" className={styles.buttonImage}/>
                 </Link>
-                </div>
-
-                <div className={styles.visualizzaPagineUnitesi}>
-                  <Link href="/visualizzaPagineUnitesiDocente">
-                    <Image src="/images/archivio.png" width="70" height="70" alt="Visualizza Pagine" className={styles.buttonImage}/>
-                  </Link>
                 </div>
 
                 <div className={styles.comunicazione}>
