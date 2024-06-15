@@ -51,6 +51,21 @@ const HomePage = () => {
     checkAuth();
   }, []); // Empty dependency array to run only once on component mount
 
+
+  const handleLogout = async () => {
+    const response = await fetch('http://localhost:3001/logout', {
+      method: 'POST',
+      credentials: 'include' // Include session credentials
+    });
+  
+    if (response.ok) {
+      // User is logged out, redirect them
+      router.push('/login');
+    } else {
+      console.error('Logout failed');
+    }
+  };
+
   return (
       <div className={styles.homePageContainer}>
         
@@ -94,7 +109,9 @@ const HomePage = () => {
                   </div>
                 </div>
               )}
-        
+              <button className="logout-button" onClick={handleLogout}>
+                 Logout
+              </button>
       </div>
   );
 };

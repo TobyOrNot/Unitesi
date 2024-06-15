@@ -4,16 +4,21 @@
 	box-sizing: border-box;
 }
 
-body {
-	font-family: Montserrat, sans-serif;
-	background-color: whitesmoke;
+body{
 	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	font-family: 'Jost', sans-serif;
+	background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
 }
 
 h1 {
 	margin: 0;
 	text-align: center;
-	color: rgb(0, 0, 0);
+	color: rgb(255, 255, 255);
 }
 
 p {
@@ -86,3 +91,22 @@ h3::before {
 		margin-right: 1.5rem;
 	}
 }
+
+
+.filter-container {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+  }
+  
+  .filter-label {
+	margin-right: 10px;
+	align-self: center;
+  }
+  
+  .filter-select {
+	width: 200px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+  }

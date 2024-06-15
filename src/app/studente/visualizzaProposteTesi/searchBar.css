@@ -1,0 +1,19 @@
+form {
+	padding-top: 20px;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+  }
+  
+  label {
+	margin-right: 10px;
+	align-self: center;
+	color: aliceblue;
+  }
+  
+  input[type="search"] {
+	width: 200px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+  }

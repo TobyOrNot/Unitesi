@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from './login.module.css';
+import styles from './login.css';
 import Image from 'next/image';
 
 
@@ -11,7 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
-
+  const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
     // Check if user is already logged in
@@ -38,7 +38,7 @@ export default function Login() {
   }, []); // Empty dependency array to run only once on component mount
 
 
-  const handleSubmit = async (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setError('');
     console.log('Logging in');
@@ -78,11 +78,7 @@ export default function Login() {
   };
 
 
-
-
-
-
-
+/*
 
   return (
     <div className={styles.body}>
@@ -117,4 +113,28 @@ export default function Login() {
       </div>
     </div>
   );
+
+  */
+
+  return (
+    <div className="main">
+    <Image src="/images/LogoUnitesi_NoContorni.png" className={styles.logo} width="350" height="100" />
+      <input 
+        type="checkbox" 
+        id="chk" 
+        aria-hidden="true" 
+        checked={isChecked} 
+        onChange={() => setIsChecked(!isChecked)} 
+      />
+      <div className="login">
+        <form onSubmit={handleLoginSubmit}>
+          <label htmlFor="chk" aria-hidden="true">Login</label>
+          <input type="email" name="email" placeholder="Email" onChange={(e) => setUsername(e.target.value)} required />
+          <input type="password" name="pswd" placeholder="Password"  onChange={(e) => setPassword(e.target.value)} required />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+  );
+
 }
