@@ -1,0 +1,175 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+
+* {
+	box-sizing: border-box;
+}
+
+body{
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	font-family: 'Jost', sans-serif;
+	background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+}
+
+h1 {
+	margin: 0;
+	text-align: center;
+	color: rgb(255, 255, 255);
+}
+
+p {
+	margin: 0;
+	line-height: 1.6;
+}
+
+ol {
+	list-style: none;
+	counter-reset: list;
+}
+
+li {
+	position: relative;
+	max-width: 60rem;
+	margin: 2rem auto;
+	padding: 2rem 1rem 1rem;
+	box-shadow: 0.1rem 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
+	border-radius: 0.25rem;
+	overflow: hidden;
+	background-color: white;
+	counter-increment: list;
+}
+
+li::before {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 1rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background:#b9aceb;
+}
+
+h3 {
+	display: flex;
+	align-items: baseline;
+	margin: 0 0 1rem;
+	color: rgb(70 70 70);
+}
+
+h3::before {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex: 0 0 auto;
+	margin-right: 1rem;
+	width: 3rem;
+	height: 3rem;
+	content: counter(list);
+	padding: 1rem;
+	border-radius: 50%;
+	background-color: #b9aceb;
+	color: white;
+}
+
+@media (min-width: 40em) {
+	li {
+		margin: 3rem auto;
+		padding: 3rem 2rem 2rem;
+	}
+	
+	h3 {
+		font-size: 2.25rem;
+		margin: 0 0 2rem;
+	}
+	
+	h3::before {
+		margin-right: 1.5rem;
+	}
+}
+
+
+.filter-container {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+  }
+  
+  .filter-label {
+	margin-right: 10px;
+	align-self: center;
+  }
+  
+  .filter-select {
+	width: 200px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+  }
+
+  .popup {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	z-index: 1000;
+  }
+
+  .popup label {
+	color: #000000;
+  }
+  
+  .popup h2 {
+	margin-top: 0;
+	color: #000000;
+  }
+  
+  .popup label {
+	display: block;
+	margin-bottom: 10px;
+  }
+  
+  .popup input,
+  .popup textarea {
+	width: 100%;
+	padding: 8px;
+	margin-top: 4px;
+	margin-bottom: 10px;
+	border: 1px solid #000000;
+	border-radius: 4px;
+  }
+  
+  .popup button {
+	margin-right: 10px;
+	padding: 8px 12px;
+	border: none;
+	border-radius: 4px;
+	background-color: #007bff;
+	color: white;
+	cursor: pointer;
+  }
+  
+  .popup button:hover {
+	background-color: #0056b3;
+  }
+  
+  .popup button:last-of-type {
+	background-color: #6c757d;
+  }
+  
+  .popup button:last-of-type:hover {
+	background-color: #5a6268;
+  }
+
+
+ .bottone {
+	margin-left: 40%;
+  }
