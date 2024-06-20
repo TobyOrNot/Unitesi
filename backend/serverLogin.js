@@ -22,27 +22,48 @@ app.use(session({
 
 // Dati di test per le credenziali
 const testUsers = [
-    {
-        username: 'tobias.paparelli@studio.unibo.it',
-        password: 'password1',
-        nome: 'Tobias',
-        cognome: 'Paparelli',
-        ruolo: 'Studente'
-    },
-    {
-        username: 'marco.patella@unibo.it',
-        password: 'password2',
-        nome: ' Marco',
-        cognome: 'Patella',
-        ruolo: 'Docente'
-    },
-    {
-      username: 'ciao',
-      password: 'ciao',
+  {
+    username: 'tobias.paparelli@studio.unibo.it',
+    password: 'password1',
+    nome: 'Tobias',
+    cognome: 'Paparelli',
+    ruolo: 'Studente'
+  },
+  {
+      username: 'marco.patella@unibo.it',
+      password: 'password2',
       nome: ' Marco',
       cognome: 'Patella',
       ruolo: 'Docente'
   },
+  {
+    username: 'antonio.evangelista@studio.unibo.it',
+    password: 'antonio',
+    nome: 'Antonio Pio',
+    cognome: 'Evangelista',
+    ruolo: 'Docente'
+  },
+  {
+    username: 'samuele.gasbarro@unibo.it',
+    password: 'samuele',
+    nome: 'Samuele',
+    cognome: 'Gasbarro',
+    ruolo: 'Collaboratore'
+  },
+  {
+    username: 'tomas.conti@unibo.it',
+    password: 'tomas',
+    nome: 'Tomas',
+    cognome: 'Conti',
+    ruolo: 'Collaboratore'
+  },
+  {
+    username: 'tomas.conti2@unibo.it',
+    password: 'tomas2',
+    nome: 'Tomas',
+    cognome: 'Conti',
+    ruolo: 'Studente'
+  }
 ];
 
 // Endpoint per il login

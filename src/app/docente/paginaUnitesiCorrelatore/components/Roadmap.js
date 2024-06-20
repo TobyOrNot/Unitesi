@@ -3,7 +3,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Checkpoint from './checkpoint/Checkpoint';
 import VisualizzaPagineUnitesi from './pagineUnitesi/VisualizzaPagineUnitesi';
-import TerminaTesi from './terminaTesi/TerminaTesi';
 import styles from './Roadmap.module.css'
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -40,8 +39,7 @@ const Roadmap = ({ pageId }) => {
 
   const [studentEmail, setStudentEmail] = useState('');
   const [correlators, setCorrelators] = useState([]);
-  const [newCorrelatorEmail, setNewCorrelatorEmail] = useState('');
-  
+  const [relatorEmail, setRelatorEmail] = useState('');
 
   
   const [checkpoints, setCheckpoints] = useState([]);
@@ -58,27 +56,27 @@ const Roadmap = ({ pageId }) => {
   const raggio = 50;
   const router = useRouter();
 
-  const fetchRoadmapData = async (pageId) => {
-    try {
-      const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}`);
-      if (!response.ok) {
-        throw new Error('Failed to load roadmap data');
-      }
-      const data = await response.json();
-      setCheckpoints(data.checkpoints);
-      setStudentEmail(data.studenteEmail);
-      setCorrelators(data.correlatoriEmail);
-    } catch (error) {
-      console.error('Error loading roadmap data:', error);
-    }
-  };
-
   useEffect(() => {
+    const fetchRoadmapData = async (pageId) => {
+      try {
+        const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}`);
+        if (!response.ok) {
+          throw new Error('Failed to load roadmap data');
+        }
+        const data = await response.json();
+        setCheckpoints(data.checkpoints);
+        setStudentEmail(data.studenteEmail);
+        setRelatorEmail(data.relatoreEmail);
+        setCorrelators(data.correlatoriEmail);
+      } catch (error) {
+        console.error('Error loading roadmap data:', error);
+      }
+    };
+  
     if (pageId) {
       fetchRoadmapData(pageId);
     }
   }, [pageId]);
-  
 
   const fetchComments = async (checkpointId) => {
     try {
@@ -106,43 +104,7 @@ const Roadmap = ({ pageId }) => {
       console.error('Error fetching comments:', error);
     }
   };
-
-    /* Membri functions */
-    const handleAddCorrelator = async () => {
-      if (newCorrelatorEmail) {
-        try {
-          const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}/addCorrelator`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: newCorrelatorEmail }),
-          });
-          const data = await response.json();
-          console.log(data);
-          setCorrelators(data);
-          setNewCorrelatorEmail('');
-          fetchRoadmapData(pageId);
-        } catch (error) {
-          console.error('Failed to add correlator:', error);
-        }
-      }
-    };
-
-    const handleRemoveCorrelator = async (correlatorEmail) => {
-      try {
-        console.log(correlatorEmail);
-        const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}/removeCorrelator/${correlatorEmail}`, {
-          method: 'DELETE',
-        });
-        const data = await response.json();
-        setCorrelators(data.correlatoriEmail);
-        fetchRoadmapData(pageId);
-      } catch (error) {
-        console.error('Failed to remove correlator:', error);
-      }
-    };
-    
+  
     /* Visualizza Pagine Unitesi function */
 
     /* Checkpoint functions (ADD, REMOVE, EDIT)*/ 
@@ -323,7 +285,7 @@ const Roadmap = ({ pageId }) => {
             },
             body: JSON.stringify({ 
               contenuto: comment,
-              autore: 'Data',
+              autore: 'Data e ora',
               data: date
             })
         });
@@ -559,28 +521,18 @@ const Roadmap = ({ pageId }) => {
           <div>
             <div className={styles.membriContainer}>
                 <h2>Studente: {studentEmail}</h2>
+                <h3>Relatore: {relatorEmail} </h3>
                 <div className={styles.correlatorsContainer}>
                   <h3>Correlatori</h3>
                   {correlators && correlators.map((correlator, index) => (
                     <div key={index} className={styles.correlatorItem}>
                       {correlator}
-                      <button className={styles.removeButton} onClick={() => handleRemoveCorrelator(correlator)}>
-                        Rimuovi
-                      </button>
                     </div>
                   ))}
-                  <div className={styles.addCorrelator}>
-                    <input
-                      type="email"
-                      placeholder="Email correlatore"
-                      value={newCorrelatorEmail}
-                      onChange={(e) => setNewCorrelatorEmail(e.target.value)}
-                    />
-                    <button onClick={handleAddCorrelator}>Aggiungi</button>
-                  </div>
                 </div>
               </div>
           </div>
+
           
           <div className={styles.roadmapContainer}>
             {!showCheckpoints && (
@@ -776,10 +728,6 @@ const Roadmap = ({ pageId }) => {
               RACCOGLI
             </button>
           )}
-
-          <div className={styles.endTesi}>
-            <TerminaTesi/>
-          </div>
 
           <div className={styles.communication} onClick={() => setShowComunicazione(true)}> {}
             <Image src="/images/comunicazione_unitesi.png" width="95" height="70" />

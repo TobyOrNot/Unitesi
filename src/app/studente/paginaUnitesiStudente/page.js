@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react';
-import Roadmap from '../paginaUnitesiRelatore/components/Roadmap';
+import Roadmap from '../paginaUnitesiStudente/components/Roadmap';
 import { useSearchParams } from 'next/navigation';
 
 function ViewRoadmap() {

@@ -2,8 +2,8 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Checkpoint from './checkpoint/Checkpoint';
-import VisualizzaPagineUnitesi from './pagineUnitesi/VisualizzaPagineUnitesi';
-import TerminaTesi from './terminaTesi/TerminaTesi';
+import Membri from './checkpoint/membri/Membri';
+import VisualizzaPagineUnitesi from './returnHome/ReturnHome';
 import styles from './Roadmap.module.css'
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -15,35 +15,20 @@ const Roadmap = ({ pageId }) => {
   const [openRectangles, setOpenRectangles] = useState({});
   const [newDocument, setNewDocument] = useState('');
   const [documents, setDocuments] = useState({});
-
+  
   const [scrollHintVisible, setScrollHintVisible] = useState(false);
   const [inputText, setInputText] = useState('');
   const [displayedText, setDisplayedText] = useState('');
   const [showComunicazione, setShowComunicazione] = useState(false);
-
-
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [newCheckpointTitle, setNewCheckpointTitle] = useState('');
-  const [newCheckpointDescription, setNewCheckpointDescription] = useState('');
-  const [newCheckpointDueDate, setNewCheckpointDueDate] = useState('');
-  const [newCheckpointError, setNewCheckpointError] = useState('');
-
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [editCheckpointTitle, setEditCheckpointTitle] = useState('');
-  const [editCheckpointDescription, setEditCheckpointDescription] = useState('');
-  const [editCheckpointDueDate, setEditCheckpointDueDate] = useState('');
-  const [editCheckpointError, setEditCheckpointError] = useState('');
-  const [editCheckpointIndex, setEditCheckpointIndex] = useState(null);
 
   const [editingCommentIndex, setEditingCommentIndex] = useState(null);
   const [editCommentText, setEditCommentText] = useState('');
 
   const [studentEmail, setStudentEmail] = useState('');
   const [correlators, setCorrelators] = useState([]);
-  const [newCorrelatorEmail, setNewCorrelatorEmail] = useState('');
-  
+  const [relatorEmail, setRelatorEmail] = useState('');
 
-  
+
   const [checkpoints, setCheckpoints] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [newCheckpoint, setNewCheckpoint] = useState({
@@ -58,27 +43,27 @@ const Roadmap = ({ pageId }) => {
   const raggio = 50;
   const router = useRouter();
 
-  const fetchRoadmapData = async (pageId) => {
-    try {
-      const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}`);
-      if (!response.ok) {
-        throw new Error('Failed to load roadmap data');
-      }
-      const data = await response.json();
-      setCheckpoints(data.checkpoints);
-      setStudentEmail(data.studenteEmail);
-      setCorrelators(data.correlatoriEmail);
-    } catch (error) {
-      console.error('Error loading roadmap data:', error);
-    }
-  };
-
   useEffect(() => {
+    const fetchRoadmapData = async (pageId) => {
+      try {
+        const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}`);
+        if (!response.ok) {
+          throw new Error('Failed to load roadmap data');
+        }
+        const data = await response.json();
+        setCheckpoints(data.checkpoints);
+        setStudentEmail(data.studenteEmail);
+        setRelatorEmail(data.relatoreEmail);
+        setCorrelators(data.correlatoriEmail);
+      } catch (error) {
+        console.error('Error loading roadmap data:', error);
+      }
+    };
+  
     if (pageId) {
       fetchRoadmapData(pageId);
     }
   }, [pageId]);
-  
 
   const fetchComments = async (checkpointId) => {
     try {
@@ -107,42 +92,6 @@ const Roadmap = ({ pageId }) => {
     }
   };
 
-    /* Membri functions */
-    const handleAddCorrelator = async () => {
-      if (newCorrelatorEmail) {
-        try {
-          const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}/addCorrelator`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: newCorrelatorEmail }),
-          });
-          const data = await response.json();
-          console.log(data);
-          setCorrelators(data);
-          setNewCorrelatorEmail('');
-          fetchRoadmapData(pageId);
-        } catch (error) {
-          console.error('Failed to add correlator:', error);
-        }
-      }
-    };
-
-    const handleRemoveCorrelator = async (correlatorEmail) => {
-      try {
-        console.log(correlatorEmail);
-        const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}/removeCorrelator/${correlatorEmail}`, {
-          method: 'DELETE',
-        });
-        const data = await response.json();
-        setCorrelators(data.correlatoriEmail);
-        fetchRoadmapData(pageId);
-      } catch (error) {
-        console.error('Failed to remove correlator:', error);
-      }
-    };
-    
     /* Visualizza Pagine Unitesi function */
 
     /* Checkpoint functions (ADD, REMOVE, EDIT)*/ 
@@ -170,136 +119,6 @@ const Roadmap = ({ pageId }) => {
       // Chiamata per recuperare i commenti del checkpoint selezionato
       await fetchComments(checkpointId);
     };
-  
-    const handleConfirmAddCheckpoint = async () => {
-        const today = new Date().toISOString().split('T')[0];
-        if (newCheckpointTitle && newCheckpointDescription && newCheckpointDueDate) {
-          if (newCheckpointDueDate >= today) {
-
-              try{
-                const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}/addCheckpoint`, {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    index: checkpoints.length + 1,
-                    titolo: newCheckpointTitle,
-                    descrizione: newCheckpointDescription,
-                    dataScadenza: newCheckpointDueDate,
-                  })
-                });
-                
-                if(!response.ok) {
-                  throw new Error('Failed to add Checkpoint');
-                }
-                const newCheckpoint = await response.json();
-                setCheckpoints([...checkpoints, newCheckpoint]);
-                setShowAddModal(false);
-                setNewCheckpointTitle('');
-                setNewCheckpointDescription('');
-                setNewCheckpointDueDate('');
-                setNewCheckpointError('');
-
-                fetchRoadmapData(pageId);
-                window.location.reload();
-              } catch (error) {
-                console.error('Error adding checkpoint:', error);
-              }
-            } else {
-              setNewCheckpointError('La data di scadenza non può essere precedente alla data di creazione della Pagina Unitesi.');
-            }
-        }
-    };
-    
-    const handleRemoveCheckpoint = async (index) => {
-      try {
-        index = index -1;
-        const checkpointId = checkpoints[index]._id;
-        const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}/removeCheckpoint/${checkpointId}`, {
-          method: 'DELETE'
-        });
-        if (!response.ok) {
-          throw new Error('Failed to remove checkpoint');
-        }
-        setCheckpoints((prevCheckpoints) => prevCheckpoints.filter((_, i) => i !== index));
-        setSelectedCheckpoint(null);
-        setCheckpoints((prevCheckpoints) =>
-          prevCheckpoints.map((checkpoint, idx) => ({ ...checkpoint, index: idx + 1 }))
-      );
-      } catch (error) {
-        console.error('Error removing checkpoint:', error);
-      }
-    };
-
-    const handleConfirmEditCheckpoint = async () => {
-      var index = editCheckpointIndex - 1;
-      console.log(checkpoints[index]);
-      const today = new Date().toISOString().split('T')[0];
-      if (editCheckpointDueDate >= today) {
-        try {
-          const checkpointId = checkpoints[index]._id;
-          const response = await fetch(`http://localhost:3002/api/paginaUnitesi/${pageId}/editCheckpoint/${checkpointId}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              titolo: editCheckpointTitle,
-              descrizione: editCheckpointDescription,
-              dataScadenza: editCheckpointDueDate,
-            })
-          });
-          if (!response.ok) {
-            throw new Error('Failed to edit checkpoint');
-          }
-          const updatedCheckpoint = await response.json();
-          setCheckpoints((prevCheckpoints) =>
-            prevCheckpoints.map((checkpoint, i) =>
-              i === index ? updatedCheckpoint : checkpoint
-            )
-          );
-          setShowEditModal(false);
-          setEditCheckpointTitle('');
-          setEditCheckpointDescription('');
-          setEditCheckpointDueDate('');
-          setEditCheckpointError('');
-
-          fetchRoadmapData(pageId);
-          window.location.reload();
-        } catch (error) {
-          console.error('Error editing checkpoint:', error);
-        }
-      } else {
-        setEditCheckpointError('La data di scadenza non può essere precedente alla data di creazione della Pagina Unitesi.');
-      }
-    };
-
-    const handleAddCheckpoint = () => {
-      setShowAddModal(true);
-    };
-
-    const handleCancelAddCheckpoint = () => {
-      setShowAddModal(false);
-      setNewCheckpointTitle('');
-      setNewCheckpointDescription('');
-    };
-  
-    const handleEditCheckpoint = (index) => {
-      const checkpoint = checkpoints.find((cp) => cp.index === index);
-      setEditCheckpointTitle(checkpoint.titolo);
-      setEditCheckpointDescription(checkpoint.descrizione);
-      setEditCheckpointDueDate(checkpoint.dataScadenza)
-      setEditCheckpointIndex(index);
-      setShowEditModal(true);
-    };
-  
-    const handleCancelEditCheckpoint = () => {
-      setShowEditModal(false);
-      setEditCheckpointTitle('');
-      setEditCheckpointDescription('');
-      setEditCheckpointIndex(null);
-    };
 
     /* Comments functions */
 
@@ -312,9 +131,6 @@ const Roadmap = ({ pageId }) => {
       try {
         checkpointIndex = checkpointIndex - 1;
         const checkpointId = checkpoints[checkpointIndex]._id;
-        const now = new Date();
-        const string = now.toISOString().split('T');
-        const date = string[0] + " " + string[1].split('.')[0];
 
         const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}/checkpoint/${checkpointId}/addComment`, {
             method: 'POST',
@@ -323,8 +139,8 @@ const Roadmap = ({ pageId }) => {
             },
             body: JSON.stringify({ 
               contenuto: comment,
-              autore: 'Data',
-              data: date
+              autore: 'NomeAutore',
+              data: new Date()
             })
         });
 
@@ -473,51 +289,6 @@ const Roadmap = ({ pageId }) => {
       }
   };
   
-    const handleValidateCheckpoint = async (checkpointIndex) => {
-      try {
-        checkpointIndex = checkpointIndex - 1;
-        const checkpointId = checkpoints[checkpointIndex]._id;
-        const response = await fetch(`http://localhost:3002/api/roadmap/${pageId}/checkpoint/${checkpointId}/validate`, {
-          method: 'PUT'
-        });
-        if (!response.ok) {
-          throw new Error('Failed to validate checkpoint');
-        }
-        const updatedCheckpoint = await response.json();
-        setCheckpoints((prevCheckpoints) =>
-          prevCheckpoints.map((checkpoint, i) =>
-            i === checkpointIndex ? updatedCheckpoint : checkpoint
-          )
-        );
-
-        await fetchComments(checkpointId);
-      } catch (error) {
-        console.error('Error validating checkpoint:', error);
-      }
-    };
-  
-    const handleInvalidateCheckpoint = async (checkpointIndex) => {
-      try {
-        checkpointIndex = checkpointIndex - 1;
-        const checkpointId = checkpoints[checkpointIndex]._id;
-        const response = await fetch(`http://localhost:3002/api/roadmap/${pageId}/checkpoint/${checkpointId}/invalidate`, {
-          method: 'PUT'
-        });
-        if (!response.ok) {
-          throw new Error('Failed to invalidate checkpoint');
-        }
-        const updatedCheckpoint = await response.json();
-        setCheckpoints((prevCheckpoints) =>
-          prevCheckpoints.map((checkpoint, i) =>
-            i === checkpointIndex ? updatedCheckpoint : checkpoint
-          )
-        );
-
-        await fetchComments(checkpointId);
-      } catch (error) {
-        console.error('Error invalidating checkpoint:', error);
-      }
-    };
 
   const handleSendMessage = () => {
     setShowComunicazione(false);
@@ -552,32 +323,20 @@ const Roadmap = ({ pageId }) => {
             <Image src="/images/unitesi_logo.png" width="500" height="150" />
           </div>
 
-          <div className={styles.backButton} onClick={() => router.push('/docente/visualizzaPagineUnitesiDocente')}>
+          <div className={styles.backButton} onClick={() => router.push('/studente/homePage')}>
             <VisualizzaPagineUnitesi />
           </div>
 
           <div>
             <div className={styles.membriContainer}>
-                <h2>Studente: {studentEmail}</h2>
+                <h2>Relatore: {relatorEmail} </h2>
                 <div className={styles.correlatorsContainer}>
                   <h3>Correlatori</h3>
                   {correlators && correlators.map((correlator, index) => (
                     <div key={index} className={styles.correlatorItem}>
                       {correlator}
-                      <button className={styles.removeButton} onClick={() => handleRemoveCorrelator(correlator)}>
-                        Rimuovi
-                      </button>
                     </div>
                   ))}
-                  <div className={styles.addCorrelator}>
-                    <input
-                      type="email"
-                      placeholder="Email correlatore"
-                      value={newCorrelatorEmail}
-                      onChange={(e) => setNewCorrelatorEmail(e.target.value)}
-                    />
-                    <button onClick={handleAddCorrelator}>Aggiungi</button>
-                  </div>
                 </div>
               </div>
           </div>
@@ -697,34 +456,6 @@ const Roadmap = ({ pageId }) => {
                               )}
                             </div>
                           </div>
-                          
-
-                          <div>
-                          <button
-                            className={styles.editCheckpointButton}
-                            onClick={() => handleEditCheckpoint(checkpoint.index)}
-                          >
-                            Modifica Checkpoint
-                          </button>
-                          <button
-                            className={styles.removeCheckpointButton}
-                            onClick={() => handleRemoveCheckpoint(checkpoint.index)}
-                          >
-                            Rimuovi Checkpoint
-                          </button>
-                        </div>
-                        <div>
-                            <button
-                              className={
-                                checkpoint.validato
-                                  ? styles.invalidateButton
-                                  : styles.validateButton
-                              }
-                              onClick={() => checkpoint.validato ? handleInvalidateCheckpoint(checkpoint.index) : handleValidateCheckpoint(checkpoint.index)}
-                            >
-                              {checkpoint.validato ? 'Invalida' : 'Valida'}
-                            </button>
-                          </div>
                           <div className={styles.dueDate}>
                             <strong>Data di Scadenza:</strong> {checkpoint.dataScadenza}
                           </div>
@@ -735,39 +466,6 @@ const Roadmap = ({ pageId }) => {
                 </div>
 
                 {scrollHintVisible && <div className={styles.scrollHint}>Scroll down for more checkpoints</div>}
-
-                <div className={styles.addCheckpointCircle} onClick={handleAddCheckpoint}>
-                  +
-                </div>
-                {showAddModal && (
-                  <div className={styles.modalBackground}>
-                    <div className={styles.modalContainer}>
-                      <label htmlFor="checkpointTitle">Titolo</label>
-                      <input
-                        type="text"
-                        id="checkpointTitle"
-                        value={newCheckpointTitle}
-                        onChange={(e) => setNewCheckpointTitle(e.target.value)}
-                      />
-                      <label htmlFor="checkpointDescription">Descrizione</label>
-                      <textarea
-                        id="checkpointDescription"
-                        value={newCheckpointDescription}
-                        onChange={(e) => setNewCheckpointDescription(e.target.value)}
-                      />
-                      <label htmlFor="checkpointDueDate">Data di scadenza</label>
-                      <input
-                        type="date"
-                        id="checkpointDueDate"
-                        value={newCheckpointDueDate}
-                        onChange={(e) => setNewCheckpointDueDate(e.target.value)}
-                      />
-                      {newCheckpointError && <div className={styles.errorMessage}>{newCheckpointError}</div>}
-                      <button onClick={handleConfirmAddCheckpoint}>Conferma dati</button>
-                      <button onClick={handleCancelAddCheckpoint}>Annulla</button>
-                    </div>
-                  </div>
-                )}
               </>
             )}
           </div>
@@ -776,10 +474,6 @@ const Roadmap = ({ pageId }) => {
               RACCOGLI
             </button>
           )}
-
-          <div className={styles.endTesi}>
-            <TerminaTesi/>
-          </div>
 
           <div className={styles.communication} onClick={() => setShowComunicazione(true)}> {}
             <Image src="/images/comunicazione_unitesi.png" width="95" height="70" />
@@ -807,36 +501,6 @@ const Roadmap = ({ pageId }) => {
                       <button className={styles.sendButton} type="button" onClick={handleSendMessage}>Invia Messaggio</button>
                   </div>
                 </form>
-              </div>
-            </div>
-          )}
-
-          {showEditModal && (
-            <div className={styles.modalBackground}>
-              <div className={styles.modalContainer}>
-                <label htmlFor="editCheckpointTitle">Titolo</label>
-                <input
-                  type="text"
-                  id="editCheckpointTitle"
-                  value={editCheckpointTitle}
-                  onChange={(e) => setEditCheckpointTitle(e.target.value)}
-                />
-                <label htmlFor="editCheckpointDescription">Descrizione</label>
-                <textarea
-                  id="editCheckpointDescription"
-                  value={editCheckpointDescription}
-                  onChange={(e) => setEditCheckpointDescription(e.target.value)}
-                />
-                <label htmlFor="editCheckpointDueDate">Data di scadenza</label>
-                <input
-                  type="date"
-                  id="editCheckpointDueDate"
-                  value={editCheckpointDueDate}
-                  onChange={(e) => setEditCheckpointDueDate(e.target.value)}
-                />
-                {editCheckpointError && <div className={styles.errorMessage}>{editCheckpointError}</div>}
-                <button onClick={handleConfirmEditCheckpoint}>Conferma</button>
-                <button onClick={handleCancelEditCheckpoint}>Annulla</button>
               </div>
             </div>
           )}

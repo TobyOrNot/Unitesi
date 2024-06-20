@@ -1,0 +1,19 @@
+.endTesi {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  padding: 7px 8px;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  position: fixed;
+  font-weight: bold;
+  border: 3px solid #000;
+  transition: transform 0.7s ease;
+}
+
+.endTesi:hover {
+  background-color: #b9aceb;
+  transform: scale(1.05);
+}

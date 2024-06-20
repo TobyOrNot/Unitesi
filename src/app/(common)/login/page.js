@@ -28,8 +28,8 @@ export default function Login() {
           router.push('/studente/homePage');
         } else if (data.user.ruolo === 'Docente') {
           router.push('/docente/homePage');
-        } else if (data.user.ruolo === 'Correlatore') {
-          router.push('/correlatore');
+        } else if (data.user.ruolo === 'Collaboratore') {
+          router.push('/collaboratore/homePage');
         }
       }
     };
@@ -64,8 +64,8 @@ export default function Login() {
           router.push('/studente/homePage');
         } else if (data.user.ruolo === 'Docente') {
           router.push('/docente/homePage');
-        } else if (data.user.ruolo === 'Correlatore') {
-          router.push('/correlatore');
+        } else if (data.user.ruolo === 'Collaboratore') {
+          router.push('/collaboratore/homePage');
         }
       } else {
         // Login failed

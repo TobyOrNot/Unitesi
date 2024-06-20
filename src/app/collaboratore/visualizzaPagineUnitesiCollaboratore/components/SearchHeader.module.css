@@ -1,0 +1,72 @@
+.search-header {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.search-title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-label {
+  font-size: 16px;
+}
+
+.filter-select {
+  padding: 5px 10px;
+  font-size: 16px;
+  border: 1px solid #6fa2dd;
+  border-radius: 5px;
+}
+
+.textbox {
+  opacity: 1; 
+}
+
+.textbox input {
+  padding-left: 44px; 
+  padding-right: 16px; 
+  font-family: Manrope, sans-serif; 
+  font-size: 16px; 
+  line-height: 26px; 
+  font-weight: 400; 
+  background: rgb(188, 204, 236); /* neutral-200 */
+  border-radius: 6px; /* border-l */
+  border-width: 0px; 
+  outline: none; 
+}
+
+
+/* hover */
+.textbox input:hover {
+  color: #BDC1CAFF; /* neutral-400 */
+  background: rgb(113, 150, 224); /* neutral-200 */
+}
+
+/* focused */
+.textbox input:focused {
+  color: rgb(10, 11, 12); /* neutral-400 */
+  background: #FFFFFFFF; /* white */
+}
+
+/* disabled */
+.textbox input:disabled {
+  color: #BDC1CAFF; /* neutral-400 */
+  background: #F3F4F6FF; /* neutral-200 */
+}
+
+.textbox :disabled + .icon, .textbox :disabled + .icon + .icon {
+  fill: #171A1FFF; /* neutral-900 */
+}

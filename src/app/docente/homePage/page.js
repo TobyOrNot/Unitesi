@@ -70,7 +70,7 @@ const HomePage = () => {
       <div className={styles.homePageContainer}>
         
         <div className={styles.logo}>
-          <Image src="/images/LogoUnitesi_NoContorni.png" className={styles.logo} width="300" height="100" />
+          <Image src="/images/unitesi_logo.png" className={styles.logo} width="300" height="100" />
         </div>
 
             <h1 className={styles.title}>Home Page</h1>
@@ -81,7 +81,7 @@ const HomePage = () => {
               {isAvailable ? 'Disponibile per Tesi' : 'Non Disponibile per Tesi'}
             </div>
 
-              <div className={styles.buttonContainer}>
+            <div className={styles.buttonContainer}>
                 
                 <div className={styles.modificaDisponibilità} onClick={toggleAvailability}>
                   <Image src="/images/modificaDisponibilità.png" width="70" height="70" alt="Cambia Disponibilità" className={styles.buttonImage}/>
@@ -98,6 +98,13 @@ const HomePage = () => {
                     <Image src="/images/comunicazione_unitesi.png" width="70" height="70" alt="Comunicazione" className={styles.buttonImage}/>
                   </Link>
                 </div>
+
+                <div className={styles.modificaDisponibilità}>
+                    <Link href="/docente/visualizzaProposteTesi">
+                        <Image src="/images/ProposteTesi.png" width="70" height="70" alt="Gestisci Proposte Tesi" className={styles.buttonImage} />
+                    </Link>
+                </div>
+
               </div>
 
               {showModal && (
