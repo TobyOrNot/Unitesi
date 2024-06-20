@@ -730,7 +730,7 @@ const Roadmap = ({ pageId }) => {
           )}
 
           <div className={styles.communication} onClick={() => setShowComunicazione(true)}> {}
-            <Image src="/images/comunicazione_unitesi.png" width="95" height="70" />
+            <Image src="/images/comunicazione_icon.png" width="95" height="70" />
           </div>
 
           {showComunicazione && (

@@ -10,7 +10,6 @@ const HomePage = () => {
     const router = useRouter();
 
     const [studentEmail, setStudentEmail] = useState('');
-    const [paginaId, setPaginaId] = useState(null);
 
     useEffect(() => {
         // Check if user is already logged in
@@ -24,23 +23,6 @@ const HomePage = () => {
                 const data = await response.json();
                 setStudentEmail(data.user.username);
 
-                // Fetch per verificare la pagina unitesi dello studente
-                const fetchPaginaUnitesi = async () => {
-                    try {
-                        const response = await fetch(`http://localhost:3002/api/paginaUnitesi/correlatore/${data.user.username}`);
-                        if (response.ok) {
-                            const data = await response.json();
-                            console.log(data.paginaUnitesiId)
-                            setPaginaId(data.paginaUnitesiId);
-                        } else {
-                            console.error('Pagina unitesi non trovata per lo studente');
-                        }
-                    } catch (error) {
-                        console.error('Errore durante il fetch della pagina unitesi:', error);
-                    }
-                };
-
-                fetchPaginaUnitesi();
             } else {
                 // User is not logged in, redirect them
                 router.push('/login');
@@ -67,7 +49,7 @@ const HomePage = () => {
     return (
         <div className={styles.homePageContainer}>
             <div className={styles.logo}>
-                <Image src="/images/LogoUnitesi_NoContorni.png" className={styles.logo} width="300" height="100" />
+                <Image src="/images/unitesi_logo.png" className={styles.logo} width="300" height="100" />
             </div>
 
             <h1 className={styles.title}>Home Page</h1>
@@ -76,24 +58,16 @@ const HomePage = () => {
             <div className={styles.buttonContainer}>
                 <div className={styles.visualizzaPagineUnitesi}>
                   <Link href="/collaboratore/visualizzaPagineUnitesiCollaboratore">
-                    <Image src="/images/archivio.png" width="70" height="70" alt="Visualizza Pagine" className={styles.buttonImage}/>
+                    <Image src="/images/archivio_icon.png" width="70" height="70" alt="Visualizza Pagine" className={styles.buttonImage}/>
                   </Link>
                 </div>
 
                 <div className={styles.comunicazione}>
                     <Link href="/comunicazione">
-                        <Image src="/images/comunicazione_unitesi.png" width="70" height="70" alt="Comunicazione" className={styles.buttonImage} />
+                        <Image src="/images/comunicazione_icon.png" width="70" height="70" alt="Comunicazione" className={styles.buttonImage} />
                     </Link>
                 </div>
             </div>
-
-            {paginaId && (
-                <div className={styles.linkPaginaUnitesi}>
-                    <Link href={`/studente/paginaUnitesiStudente?id=${paginaId}`}>
-                        Accedi alla tua pagina unitesi
-                    </Link>
-                </div>
-            )}
 
             <button className="logout-button" onClick={handleLogout}>
                 Logout

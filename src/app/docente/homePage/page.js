@@ -84,18 +84,18 @@ const HomePage = () => {
             <div className={styles.buttonContainer}>
                 
                 <div className={styles.modificaDisponibilità} onClick={toggleAvailability}>
-                  <Image src="/images/modificaDisponibilità.png" width="70" height="70" alt="Cambia Disponibilità" className={styles.buttonImage}/>
+                  <Image src="/images/modifica_icon.png" width="70" height="70" alt="Cambia Disponibilità" className={styles.buttonImage}/>
                 </div>
 
                 <div className={styles.visualizzaPagineUnitesi}>
                   <Link href="/docente/visualizzaPagineUnitesiDocente">
-                    <Image src="/images/archivio.png" width="70" height="70" alt="Visualizza Pagine" className={styles.buttonImage}/>
+                    <Image src="/images/archivio_icon.png" width="70" height="70" alt="Visualizza Pagine" className={styles.buttonImage}/>
                   </Link>
                 </div>
 
                 <div className={styles.comunicazione}>
                   <Link href="/comunicazione">
-                    <Image src="/images/comunicazione_unitesi.png" width="70" height="70" alt="Comunicazione" className={styles.buttonImage}/>
+                    <Image src="/images/comunicazione_icon.png" width="70" height="70" alt="Comunicazione" className={styles.buttonImage}/>
                   </Link>
                 </div>
 

@@ -118,7 +118,7 @@ export default function Login() {
 
   return (
     <div className="main">
-    <Image src="/images/LogoUnitesi_NoContorni.png" className={styles.logo} width="350" height="100" />
+    <Image src="/images/unitesi_logo.png" className={styles.logo} width="350" height="100" />
       <input 
         type="checkbox" 
         id="chk" 

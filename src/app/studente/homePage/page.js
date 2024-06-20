@@ -12,6 +12,7 @@ const HomePage = () => {
   const router = useRouter();
 
   const [studentEmail, setStudentEmail] = useState('');
+  const [paginaId, setPaginaId] = useState(null);
 
   useEffect(() => {
     // Check if user is already logged in
@@ -72,7 +73,7 @@ const HomePage = () => {
       <div className="homePageContainer">
         
         <div className="logo">
-          <Image src="/images/LogoUnitesi_NoContorni.png" className={styles.logo} width="300" height="100" />
+          <Image src="/images/unitesi_logo.png" className={styles.logo} width="300" height="100" />
         </div>
 
             <h1 className="title">Home Page</h1>
@@ -88,7 +89,7 @@ const HomePage = () => {
 
                 <div className="comunicazione">
                   <Link href="/comunicazione">
-                    <Image src="/images/comunicazione_unitesi.png" width="70" height="70" alt="Comunicazione" className={styles.buttonImage}/>
+                    <Image src="/images/comunicazione_icon.png" width="70" height="70" alt="Comunicazione" className={styles.buttonImage}/>
                   </Link>
                 </div>
 

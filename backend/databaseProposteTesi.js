@@ -4,6 +4,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const PropostaTesi = require('./models/propostaTesi.module')
+const PaginaUnitesi = require('./models/paginaUnitesi.module')
+const Checkpoint = require('./models/checkpoint.module');
+const Comment = require('./models/comment.module');
+
 
 // Middleware per parse JSON bodies
 app.use(bodyParser.json());
