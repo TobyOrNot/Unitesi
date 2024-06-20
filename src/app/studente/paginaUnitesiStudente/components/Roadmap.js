@@ -45,6 +45,7 @@ const Roadmap = ({ pageId }) => {
 
   useEffect(() => {
     const fetchRoadmapData = async (pageId) => {
+      
       try {
         const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}`);
         if (!response.ok) {
@@ -135,7 +136,10 @@ const Roadmap = ({ pageId }) => {
         const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}/checkpoint/${checkpointId}/addComment`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-cache, no-store, must-revalidate',
+              'Pragma': 'no-cache',
+              'Expires': '0'
             },
             body: JSON.stringify({ 
               contenuto: comment,
@@ -174,7 +178,10 @@ const Roadmap = ({ pageId }) => {
           const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}/checkpoint/${checkpointId}/editComment/${commentId}`, {
               method: 'PUT',
               headers: {
-                  'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
               },
               body: JSON.stringify({
                   contenuto: editCommentText
@@ -243,7 +250,10 @@ const Roadmap = ({ pageId }) => {
         const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}/checkpoint/${checkpointId}/addDocument`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
           },
           body: JSON.stringify({ 
             nome: document
@@ -476,7 +486,7 @@ const Roadmap = ({ pageId }) => {
           )}
 
           <div className={styles.communication} onClick={() => setShowComunicazione(true)}> {}
-            <Image src="/images/comunicazione_unitesi.png" width="95" height="70" />
+            <Image src="/images/comunicazione_icon.png" width="95" height="70" />
           </div>
 
           {showComunicazione && (

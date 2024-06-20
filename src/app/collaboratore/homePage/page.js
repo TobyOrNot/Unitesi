@@ -11,7 +11,10 @@ const HomePage = () => {
 
     const [studentEmail, setStudentEmail] = useState('');
 
+
+
     useEffect(() => {
+       
         // Check if user is already logged in
         const checkAuth = async () => {
             const response = await fetch('http://localhost:3001/isAuthenticated', {

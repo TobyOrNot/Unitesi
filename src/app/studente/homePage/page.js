@@ -17,6 +17,7 @@ const HomePage = () => {
   useEffect(() => {
     // Check if user is already logged in
     const checkAuth = async () => {
+      
       const response = await fetch('http://localhost:3001/isAuthenticated', {
         method: 'GET',
         credentials: 'include' // Include session credentials
@@ -28,6 +29,7 @@ const HomePage = () => {
 
         // Fetch per verificare la pagina unitesi dello studente
           const fetchPaginaUnitesi = async () => {
+            
               try {
                   const response = await fetch(`http://localhost:3002/api/paginaUnitesi/studente/${data.user.username}`);
                   if (response.ok) {

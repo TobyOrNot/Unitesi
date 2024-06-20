@@ -65,8 +65,8 @@ const Roadmap = ({ pageId }) => {
         }
         const data = await response.json();
         setCheckpoints(data.checkpoints);
-        setStudentEmail(emailToName(data.studenteEmail));
-        setRelatorEmail(emailToName(data.relatoreEmail));
+        setStudentEmail(data.studenteEmail);
+        setRelatorEmail(data.relatoreEmail);
         setCorrelators(data.correlatoriEmail);
       } catch (error) {
         console.error('Error loading roadmap data:', error);
@@ -142,7 +142,10 @@ const Roadmap = ({ pageId }) => {
                 const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}/addCheckpoint`, {
                   method: 'POST',
                   headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache',
+                    'Expires': '0'
                   },
                   body: JSON.stringify({
                     index: checkpoints.length + 1,
@@ -204,7 +207,10 @@ const Roadmap = ({ pageId }) => {
           const response = await fetch(`http://localhost:3002/api/paginaUnitesi/${pageId}/editCheckpoint/${checkpointId}`, {
             method: 'PUT',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-cache, no-store, must-revalidate',
+              'Pragma': 'no-cache',
+              'Expires': '0'
             },
             body: JSON.stringify({
               titolo: editCheckpointTitle,
@@ -281,7 +287,10 @@ const Roadmap = ({ pageId }) => {
         const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}/checkpoint/${checkpointId}/addComment`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-cache, no-store, must-revalidate',
+              'Pragma': 'no-cache',
+              'Expires': '0'
             },
             body: JSON.stringify({ 
               contenuto: comment,
@@ -320,7 +329,10 @@ const Roadmap = ({ pageId }) => {
           const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}/checkpoint/${checkpointId}/editComment/${commentId}`, {
               method: 'PUT',
               headers: {
-                  'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
               },
               body: JSON.stringify({
                   contenuto: editCommentText
@@ -389,7 +401,10 @@ const Roadmap = ({ pageId }) => {
         const response = await fetch(`http://localhost:3002/api/paginaunitesi/${pageId}/checkpoint/${checkpointId}/addDocument`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
           },
           body: JSON.stringify({ 
             nome: document

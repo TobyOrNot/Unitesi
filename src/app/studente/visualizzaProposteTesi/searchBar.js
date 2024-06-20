@@ -28,6 +28,7 @@ const SearchBar = ({ onSearchChange, onSearchChange2 }) => {
   </form>
   <form onsubmit="event.preventDefault();" role="search">
     <label htmlFor="search">Cerca docente</label>
+    <div>
     <input
       id="searchDocente"
       type="search"
@@ -36,6 +37,7 @@ const SearchBar = ({ onSearchChange, onSearchChange2 }) => {
       required=""
       onChange={handleChange2}
     />
+    </div>
   </form>
   </div>
   );

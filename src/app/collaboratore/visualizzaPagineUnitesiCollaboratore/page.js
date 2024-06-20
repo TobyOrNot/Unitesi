@@ -53,16 +53,6 @@ function ViewPages() {
     }
   };
 
-  function emailToName(email) {
-    const [username, domain] = email.split('@');
-    const [firstName, lastName] = username.split('.');
-    
-    const formattedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
-    const formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
-    
-    return `${formattedFirstName} ${formattedLastName}`;
- }
-
   return (
     <div className={styles.proposteContainer}>
       <h2 className={styles.title}>Pagine Unitesi di {nomeCollaboratore}</h2>

@@ -14,7 +14,7 @@ function PageItem({ name, ruolo, descrizione, url }) {
   return (
     <div className={styles.pageItem}>
       <div className={styles.teacherRole}>{ruolo}</div>
-      <Image src="/images/Line.png" className={styles.line} width="2000" height="2000" alt="Line" />
+      <Image src="/images/line_icon.png" className={styles.line} width="2000" height="2000" alt="Line" />
       
       <div className={styles.content}>
         <h3>{name}</h3>

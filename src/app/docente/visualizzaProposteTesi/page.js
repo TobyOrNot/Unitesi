@@ -45,6 +45,8 @@ const VisualizzaProposte = () => {
 
         const propostaTesi = await response.json();
         console.log('Proposal successfully added:', propostaTesi);
+        setShowPopup(false);
+        window.location.reload();
     } catch (error) {
         console.error('Error:', error);
     }
@@ -57,6 +59,7 @@ const VisualizzaProposte = () => {
   const [emailDocente, setEmailDocente] = useState('');
 
   useEffect(() => {
+    
     // Check if user is already logged in
     const checkAuth = async () => {
       try {
