@@ -14,6 +14,7 @@ const HomePage = () => {
   const [studentEmail, setStudentEmail] = useState('');
   const [paginaId, setPaginaId] = useState(null);
 
+  
   useEffect(() => {
     // Check if user is already logged in
     const checkAuth = async () => {

@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import styles from './ViewPages.module.css';
 import PageItem from './components/PageItem';
 import SearchHeader from './components/searchHeader';
+import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 function ViewPages() {
@@ -137,7 +139,16 @@ function ViewPages() {
 
   return (
     <div className={styles.proposteContainer}>
+
       <h2 className={styles.title}>Pagine Unitesi di {nomeDocente}</h2>
+      
+      <div className={styles.buttonContainer}>
+        <div className={styles.home}>
+            <Link href="/login">
+              <Image src="/images/home_page.png" width="70" height="70" alt="Return home" className={styles.buttonImage}/>
+            </Link>
+          </div>
+        </div>
 
       <SearchHeader />
 
@@ -199,7 +210,13 @@ function ViewPages() {
           </div>
         </div>
       )}
-      <img src="/images/comunicazione_icon.png" className={styles.communication} />
+       <div className={styles.buttonContainer}>
+        <div className={styles.communication}>
+            <Link href="/comunicazione">
+              <Image src="/images/comunicazione_icon.png" width="70" height="70" alt="Comunicazione" className={styles.buttonImage}/>
+            </Link>
+          </div>
+        </div>
     </div>
   );
 }

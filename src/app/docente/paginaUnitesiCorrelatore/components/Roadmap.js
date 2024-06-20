@@ -55,7 +55,7 @@ const Roadmap = ({ pageId }) => {
   const containerRef = useRef(null);
   const raggio = 50;
   const router = useRouter();
-
+  
   useEffect(() => {
     const fetchRoadmapData = async (pageId) => {
       
